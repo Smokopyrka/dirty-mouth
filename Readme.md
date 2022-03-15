@@ -1,4 +1,6 @@
-Plugin wyszukujący w google frazę zawartą w schowku, dodający na jej końcu " stackoverflow", pozwalający łatwo skopiować interesujący fragment błędu i za pomocą skrótu klawiszowego (O + TAB) poszukać rozwiązania na tej znanej witrynie.
+Plugin wyszukujący okreslony zbiór wulgaryzmów z języka polskiego
+w obecnie zfocusowanym oknie z kodem. Wyszukane wulgaryzmy zostają
+podkreślone grubą czerwoną linią.
 # Skład zespołu:
 * Michał Dzieciuchowicz 229874
 * Marcin Gadziński 229877
