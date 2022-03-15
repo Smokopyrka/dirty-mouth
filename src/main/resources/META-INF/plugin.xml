@@ -1,11 +1,10 @@
 <idea-plugin>
     <id>dirty.mouth.dirty_mouth</id>
-    <name>Plugin display name here</name>
+    <name>Search</name>
     <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Simple plugin
     ]]></description>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
@@ -18,5 +17,9 @@
 
     <actions>
         <!-- Add your actions here -->
+        <action id="SearchPlugin" class="SearchPlugin" text="Search Plugin" description="Plugin that search for text specified in clipboard in google">
+            <add-to-group group-id="$LRU" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="O" second-keystroke="TAB"/>
+        </action>
     </actions>
 </idea-plugin>
