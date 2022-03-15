@@ -18,6 +18,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FindCurseWordsAction extends AnAction {
+    private final static String NOT_FOUND = "No curse words were found in this document";
+    private final static String NOT_FOUND_TITLE = "No curse words found";
+    private final static String FOUND_TITLE = "Found curse words!!!";
+    private final static List<String> CRUSE_WORDS = Arrays.asList(
+            "dupa",
+            "kupa",
+            "chuj",
+            "penis",
+            "gówno"
+    );
+
+
+    private final String patternString;
+    private final Pattern pattern;
 
     public String createPatternString(List<String> tokens) {
         var stringBuilder = new StringBuilder();
@@ -31,14 +45,9 @@ public class FindCurseWordsAction extends AnAction {
         return stringBuilder.toString();
     }
 
-    private List<String> getCruseWords() {
-        return Arrays.asList(
-                "dupa",
-                "kupa",
-                "chuj",
-                "penis",
-                "gówno"
-        );
+    public FindCurseWordsAction() {
+        this.patternString = createPatternString(CRUSE_WORDS);
+        this.pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
     }
 
     private class CurseMatch {
@@ -82,7 +91,7 @@ public class FindCurseWordsAction extends AnAction {
     }
 
     private List<CurseMatch> getCurseWordOccurrences(Document document, Pattern pattern) {
-        List<CurseMatch> matches = new ArrayList<CurseMatch>();
+        List<CurseMatch> matches = new ArrayList<>();
         Matcher matcher = pattern.matcher(document.getText());
         while (matcher.find()) {
             int length = matcher.group().length();
@@ -106,15 +115,14 @@ public class FindCurseWordsAction extends AnAction {
         var editor = event.getData(CommonDataKeys.EDITOR);
         var document = editor.getDocument();
         String docText = document.getText().toLowerCase(Locale.ROOT);
-        Pattern pattern = Pattern.compile(createPatternString(getCruseWords()));
         var textStyle = new TextAttributes();
         textStyle.setEffectType(EffectType.BOLD_LINE_UNDERSCORE);
         textStyle.setEffectColor(Color.RED);
         List<CurseMatch> matches = getCurseWordOccurrences(document, pattern);
         if (matches.size() == 0) {
             Messages.showDialog(
-                    "No curse words were found in this document",
-                    "No curse words found",
+                    NOT_FOUND,
+                    NOT_FOUND_TITLE,
                     new String[]{"Ok"},
                     1,
                     Messages.getInformationIcon()
@@ -122,7 +130,7 @@ public class FindCurseWordsAction extends AnAction {
         } else {
             Messages.showDialog(
                     String.format("Found %d curse words!!!", matches.size()),
-                    "Found curse words!!!",
+                    FOUND_TITLE,
                     new String[]{"Ok"},
                     1,
                     Messages.getInformationIcon()
