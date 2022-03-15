@@ -1,11 +1,10 @@
 <idea-plugin>
     <id>dirty.mouth.dirty_mouth</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <name>Dirty Mouth</name>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    <h1>Curse word detection plugin</h1>
+    <p>A plugin that allows you to search for curse words in the currently focues file</p>
     ]]></description>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
@@ -13,10 +12,16 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
     </extensions>
 
     <actions>
+        <action
+            id="FindCurseWordsAction"
+            class="FindCurseWordsAction"
+            text="Find curse words"
+            description="Find all curse words present in the focused file">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
         <!-- Add your actions here -->
     </actions>
 </idea-plugin>
